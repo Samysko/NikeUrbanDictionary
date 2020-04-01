@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Nike - Urban Dictionary</string>
+    <string name="like">Likes</string>
+    <string name="dislike">Dislikes</string>
+    <string name="sort_by">Sort by number of:</string>
+    <string name="hint_search">Type any word...</string>
+</resources>
