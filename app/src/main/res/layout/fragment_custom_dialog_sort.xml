@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.071">
 
         <RadioButton
-            android:id="@+id/radioButton_likes"
+            android:id="@+id/rbLikes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -40,7 +40,7 @@
             android:text="@string/like" />
 
         <RadioButton
-            android:id="@+id/radioButton_dislikes"
+            android:id="@+id/rbDislikes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

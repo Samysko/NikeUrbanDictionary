@@ -8,6 +8,12 @@ import com.example.nikeurbandictionary.service.ResponseUrbanApi
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+    companion object{
+        const val THUMBS_UP: Boolean = true
+        const val THUMBS_DOWN: Boolean = false
+    }
+
+
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
 
     fun updateSearchedWordList(term: String, sort: Boolean, isOrdered: Boolean = false) = viewModelScope.launch {
