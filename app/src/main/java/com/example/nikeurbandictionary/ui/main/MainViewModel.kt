@@ -12,13 +12,13 @@ class MainViewModel : ViewModel() {
 
     fun updateSearchedWordList(term: String, sort: Boolean, isOrdered: Boolean = false) = viewModelScope.launch {
         try {
-                val repository = ResponseUrbanApi()
-                val listSearchedWord = repository.retrieveWordDefinitions(term)
-                searchedWordList.value = when {
-                    isOrdered && sort -> listSearchedWord.list.sortedBy { it.thumbs_up }
-                    isOrdered -> listSearchedWord.list.sortedByDescending { it.thumbs_up }
-                    else -> listSearchedWord.list
-                }
+            val repository = ResponseUrbanApi()
+            val listSearchedWord = repository.retrieveWordDefinitions(term)
+            searchedWordList.value = when {
+                isOrdered && sort -> listSearchedWord.list.sortedBy { it.thumbs_up }
+                isOrdered -> listSearchedWord.list.sortedByDescending { it.thumbs_up }
+                else -> listSearchedWord.list
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
