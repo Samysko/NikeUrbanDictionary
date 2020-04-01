@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nikeurbandictionary.model.SearchedWord
 import com.example.nikeurbandictionary.service.ResponseUrbanApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
     companion object{
@@ -13,8 +15,8 @@ class MainViewModel : ViewModel() {
         const val THUMBS_DOWN: Boolean = false
     }
 
-
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
+    val progress = MutableLiveData<Boolean>()
 
     fun updateSearchedWordList(term: String, sort: Boolean, isOrdered: Boolean = false) = viewModelScope.launch {
         try {

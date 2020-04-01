@@ -2,6 +2,7 @@ package com.example.nikeurbandictionary.ui.main
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.example.nikeurbandictionary.ui.CustomDialogSortFragment
 import com.example.nikeurbandictionary.ui.main.recycler.SearchedWordAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_word_description.*
+import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListener {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         }
 
         initializeWordObserver()
+        progressDialogObserver()
         initRecyclerView()
         initializeListeners()
     }
@@ -38,6 +41,16 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
     private fun initializeWordObserver() {
         viewModel.searchedWordList.observe(this, Observer {
             searchedWordAdapter.submitList(it)
+        })
+    }
+
+    private fun progressDialogObserver()
+    {
+        viewModel.progress.observe(this, Observer {
+            if (it)
+                progressBar.visibility = View.VISIBLE
+            else
+                progressBar.visibility = View.INVISIBLE
         })
     }
 
