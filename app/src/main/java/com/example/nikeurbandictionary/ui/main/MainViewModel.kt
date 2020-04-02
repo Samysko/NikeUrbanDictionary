@@ -17,8 +17,8 @@ class MainViewModel : ViewModel() {
             progress.value = true
             val listSearchedWord = repository.retrieveWordDefinitions(term)
             searchedWordList.value = when {
-                isOrdered && sort -> listSearchedWord.list.sortedBy { it.thumbs_up }
-                isOrdered -> listSearchedWord.list.sortedByDescending { it.thumbs_up }
+                isOrdered && sort -> listSearchedWord.list.sortedByDescending { it.thumbs_up }
+                isOrdered -> listSearchedWord.list.sortedByDescending { it.thumbs_down }
                 else -> listSearchedWord.list
             }
             progress.value = false
