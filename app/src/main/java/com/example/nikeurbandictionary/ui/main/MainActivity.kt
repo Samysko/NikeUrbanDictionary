@@ -70,14 +70,6 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         rvWordList.adapter = searchedWordAdapter
     }
 
-    /*
-    This implementation would work with DI
-
-    private fun showDialogFragment(dialogFragment: DialogFragment){
-
-    }
-    */
-
     private fun showDialogFragment(){
         val sortDialogFragment = CustomDialogSortFragment()
         val fragmentManager = supportFragmentManager
