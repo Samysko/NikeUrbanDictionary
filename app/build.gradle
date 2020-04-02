@@ -55,6 +55,7 @@ dependencies {
     def retrofit_version = "2.6.0"
     def kotlin_coroutines_version = "1.3.0"
     def test_coroutines_version = "1.3.5"
+    def kotlin_coroutines_mockito_version = "1.3.0-M1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -88,6 +89,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     // Coroutines Test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutines_version"
+
+    testImplementation 'junit:junit:4.12',
+            'org.mockito:mockito-core:2.23.0',
+            'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0',
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_mockito_version"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
