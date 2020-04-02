@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nikeurbandictionary.model.SearchedWord
 import com.example.nikeurbandictionary.service.ResponseUrbanApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
@@ -16,12 +14,15 @@ class MainViewModel : ViewModel() {
     fun updateSearchedWordList(term: String, sort: Boolean, isOrdered: Boolean = false) = viewModelScope.launch {
         try {
             val repository = ResponseUrbanApi()
+            progress.value = true
             val listSearchedWord = repository.retrieveWordDefinitions(term)
             searchedWordList.value = when {
                 isOrdered && sort -> listSearchedWord.list.sortedBy { it.thumbs_up }
                 isOrdered -> listSearchedWord.list.sortedByDescending { it.thumbs_up }
                 else -> listSearchedWord.list
             }
+            progress.value = false
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
