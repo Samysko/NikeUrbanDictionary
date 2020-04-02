@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.nikeurbandictionary.R
 import com.example.nikeurbandictionary.ui.main.MainViewModel
+import com.example.nikeurbandictionary.util.THUMBS_DOWN
+import com.example.nikeurbandictionary.util.THUMBS_UP
 import kotlinx.android.synthetic.main.fragment_custom_dialog_sort.*
 
 class CustomDialogSortFragment : DialogFragment(), View.OnClickListener {
@@ -26,8 +28,8 @@ class CustomDialogSortFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         val dialogListener = activity as DialogListener?
         when(v) {
-            this.rbLikes -> dialogListener?.onOptionSelected(MainViewModel.THUMBS_UP)
-            this.rbDislikes -> dialogListener?.onOptionSelected(MainViewModel.THUMBS_DOWN)
+            this.rbLikes -> dialogListener?.onOptionSelected(THUMBS_UP)
+            this.rbDislikes -> dialogListener?.onOptionSelected(THUMBS_DOWN)
         }
         dismiss()
     }

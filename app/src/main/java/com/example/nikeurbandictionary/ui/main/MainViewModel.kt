@@ -10,11 +10,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
-    companion object{
-        const val THUMBS_UP: Boolean = true
-        const val THUMBS_DOWN: Boolean = false
-    }
-
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
     val progress = MutableLiveData<Boolean>()
 

@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nikeurbandictionary.R
 import com.example.nikeurbandictionary.ui.CustomDialogSortFragment
 import com.example.nikeurbandictionary.ui.main.recycler.SearchedWordAdapter
+import com.example.nikeurbandictionary.util.SORT_FRAGMENT_TAG
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_word_description.*
 import kotlinx.coroutines.delay
+import kotlin.reflect.jvm.internal.impl.load.java.UtilsKt
 
 class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListener {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
@@ -44,8 +46,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         })
     }
 
-    private fun progressDialogObserver()
-    {
+    private fun progressDialogObserver() {
         viewModel.progress.observe(this, Observer {
             if (it)
                 progressBar.visibility = View.VISIBLE
@@ -80,13 +81,12 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
     private fun showDialogFragment(){
         val sortDialogFragment = CustomDialogSortFragment()
         val fragmentManager = supportFragmentManager
-        sortDialogFragment.show(fragmentManager, "test")
+        sortDialogFragment.show(fragmentManager, SORT_FRAGMENT_TAG)
     }
 
     override fun onOptionSelected(sortBy: Boolean) {
         this.sortBy = sortBy
-        sortingEnabled = true
+        this.sortingEnabled = true
         viewModel.updateSearchedWordList(tvWordDescription.text.toString(), sortBy, sortingEnabled)
-
     }
 }
