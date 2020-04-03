@@ -5,6 +5,8 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.example.nikeurbandictionary.R
@@ -23,15 +25,14 @@ class MainActivityTest{
 
     @Test
     fun shouldHaveItemsInside(){
-        val myEditText = onView(ViewMatchers
+        val mainEditText = onView(ViewMatchers
             .withId(R.id.etWordSearch))
-        val myRecyclerView = onView(ViewMatchers
-            .withId(R.id.rvWordList))
+        val mainRecyclerView = onView(withId(R.id.rvWordList))
 
-        myEditText.perform(ViewActions
+        mainEditText.perform(ViewActions
             .replaceText("house"))
 
-        myRecyclerView.check { view, noViewFoundException ->
+        mainRecyclerView.check { view, noViewFoundException ->
             noViewFoundException?.apply {
                 throw this
             }
@@ -44,11 +45,21 @@ class MainActivityTest{
 
     @Test
     fun shouldNotBeEmpty(){
-        val mainEditText = onView(ViewMatchers.withId(R.id.etWordSearch))
+        val mainEditText = onView(withId(R.id.etWordSearch))
 
         mainEditText.perform(ViewActions
             .replaceText("hello"))
 
         mainEditText.check(matches(not("")))
+    }
+
+    @Test
+    fun shouldDisplayCustomDialog(){
+        val mainButton = onView(withId(R.id.ibSort))
+        val dialogButton = onView(withId(R.id.rbLikes))
+
+        mainButton.perform(ViewActions.click())
+
+        dialogButton.check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
     }
 }
