@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.nikeurbandictionary.R
-import com.example.nikeurbandictionary.ui.main.MainViewModel
 import com.example.nikeurbandictionary.util.THUMBS_DOWN
 import com.example.nikeurbandictionary.util.THUMBS_UP
 import kotlinx.android.synthetic.main.fragment_custom_dialog_sort.*

@@ -20,20 +20,17 @@ class MainActivityTest{
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
-    
+
     @Test
     fun shouldHaveItemsInside(){
-        // Given
         val myEditText = onView(ViewMatchers
             .withId(R.id.etWordSearch))
         val myRecyclerView = onView(ViewMatchers
             .withId(R.id.rvWordList))
 
-        // When
         myEditText.perform(ViewActions
             .replaceText("house"))
 
-        // Assert
         myRecyclerView.check { view, noViewFoundException ->
             noViewFoundException?.apply {
                 throw this
@@ -47,14 +44,11 @@ class MainActivityTest{
 
     @Test
     fun shouldNotBeEmpty(){
-        // Given
         val mainEditText = onView(ViewMatchers.withId(R.id.etWordSearch))
 
-        // When
         mainEditText.perform(ViewActions
             .replaceText("hello"))
 
-        // Assert
         mainEditText.check(matches(not("")))
     }
 }

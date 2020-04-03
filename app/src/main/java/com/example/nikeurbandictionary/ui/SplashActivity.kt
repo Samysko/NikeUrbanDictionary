@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.os.HandlerCompat
 import com.example.nikeurbandictionary.R
 import com.example.nikeurbandictionary.ui.main.MainActivity
 

@@ -16,8 +16,6 @@ import com.example.nikeurbandictionary.ui.main.recycler.SearchedWordAdapter
 import com.example.nikeurbandictionary.util.SORT_FRAGMENT_TAG
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_word_description.*
-import kotlinx.coroutines.delay
-import kotlin.reflect.jvm.internal.impl.load.java.UtilsKt
 
 class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListener {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
