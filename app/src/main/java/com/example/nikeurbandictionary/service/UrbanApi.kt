@@ -26,6 +26,12 @@ interface UrbanApi {
     suspend fun getWordDefinitions(@Query("term") term: String): SearchedWordList
 
     companion object Factory {
+        /**
+         *  Builds an instance of UrbanAPI using Retrofit.
+         *
+         * @param context Used to know whether the app has internet or not.
+         * @return Instance of UrbanAPI with Retrofit using cache with OkHTTP and moshi.
+         */
         fun create(context: Context): UrbanApi {
             val cacheSize = 10 * 1024 * 1024 // 10 MB
             val httpCacheDirectory = File(context.cacheDir, "http-cache")

@@ -13,6 +13,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
     val progress = MutableLiveData<Boolean>()
 
+    /**
+     *  This function updates the SearchedWords List's objects by launching a coroutine.
+     *
+     *  @param term Word to search with Urban Dictionary
+     *  @param sort Indicates which type of sorting is going to be applied
+     *  @param isOrdered Indicates whether the list is going to be sorted or not
+     */
     fun updateSearchedWordList(term: String, sort: Boolean, isOrdered: Boolean = false) = viewModelScope.launch {
         val cache = UtilCache.getCache(term)
         if (cache != null) {
@@ -33,10 +40,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         progress.value = false
     }
 
-    private fun sortList(isOrdered: Boolean, sort: Boolean, cache: List<SearchedWord>): List<SearchedWord> = when {
-            isOrdered && sort -> cache.sortedByDescending { it.thumbs_up }
-            isOrdered -> cache.sortedByDescending { it.thumbs_down }
-            else -> cache
+    private fun sortList(isOrdered: Boolean, sort: Boolean, searchedWordList: List<SearchedWord>): List<SearchedWord> = when {
+            isOrdered && sort -> searchedWordList.sortedByDescending { it.thumbs_up }
+            isOrdered -> searchedWordList.sortedByDescending { it.thumbs_down }
+            else -> searchedWordList
     }
 
 }
