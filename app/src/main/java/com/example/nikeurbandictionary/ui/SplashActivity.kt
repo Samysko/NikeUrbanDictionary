@@ -15,9 +15,6 @@ class SplashActivity : AppCompatActivity() {
         showSplash()
     }
 
-    fun startAnimation() {
-    }
-
     private fun showSplash() {
         Handler().postDelayed({
             startActivity(
