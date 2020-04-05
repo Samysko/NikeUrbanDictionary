@@ -44,7 +44,7 @@ interface UrbanApi {
                     .maxAge(5, TimeUnit.MINUTES)
                     .build()
 
-                if (UtilService.hasNetworkConnection(context)!!) {
+                if (UtilService.hasNetworkConnection(context) == true) {
                     request = request.newBuilder()
                         .header("Cache-Control", cacheControl.toString())
                         .removeHeader("Pragma")

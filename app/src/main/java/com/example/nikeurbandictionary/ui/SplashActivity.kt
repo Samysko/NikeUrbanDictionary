@@ -15,10 +15,10 @@ class SplashActivity : AppCompatActivity() {
         showSplash()
     }
 
-    fun startAnimation(){
+    fun startAnimation() {
     }
 
-    private fun showSplash(){
+    private fun showSplash() {
         Handler().postDelayed({
             startActivity(
                 Intent(this, MainActivity::class.java)
