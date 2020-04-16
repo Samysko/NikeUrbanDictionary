@@ -2,6 +2,7 @@ package com.example.nikeurbandictionary
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
+import com.example.nikeurbandictionary.service.UrbanApi
 import com.example.nikeurbandictionary.util.MainCoroutineRule
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -25,7 +26,7 @@ class NetworkTest {
             // Given
             val term = "hey"
 
-            // When
+            // TODO: Implement ViewModel
             val responseList = UrbanApi.create(instrumentationContext).getWordDefinitions(term).list
 
             // Then

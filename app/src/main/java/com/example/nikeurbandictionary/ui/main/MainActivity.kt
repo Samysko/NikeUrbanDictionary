@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         initRecyclerView()
         initializeListeners()
     }
-    
+
     private fun initializeWordObserver() {
         viewModel.searchedWordList.observe(this, Observer {
             searchedWordAdapter.submitList(it)
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
 
     override fun onOptionSelected(sortBy: Boolean) {
         this.sortBy = sortBy
-        this.sortingEnabled = true
-        viewModel.updateSearchedWordList(tvWordDescription.text.toString(), sortBy, sortingEnabled)
+        sortingEnabled = true
+        viewModel.updateSearchedWordList(tvWordDescription.text.toString(), this.sortBy, sortingEnabled)
     }
 }
