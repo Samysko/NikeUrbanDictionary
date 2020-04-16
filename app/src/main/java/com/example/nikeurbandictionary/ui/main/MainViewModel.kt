@@ -1,15 +1,15 @@
 package com.example.nikeurbandictionary.ui.main
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nikeurbandictionary.model.SearchedWord
-import com.example.nikeurbandictionary.service.ResponseUrbanApi
+import com.example.nikeurbandictionary.service.UrbanApi
 import com.example.nikeurbandictionary.util.UtilCache
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel @Inject constructor(private val repository: UrbanApi) : ViewModel() {
     val searchedWordList = MutableLiveData<List<SearchedWord>>()
     val progress = MutableLiveData<Boolean>()
 
@@ -27,9 +27,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             searchedWordList.value = sortList(isOrdered, sort, cache)
         } else {
             try {
-                val repository = ResponseUrbanApi(getApplication())
                 progress.value = true
-                val listSearchedWord = repository.retrieveWordDefinitions(term)
+                val listSearchedWord = repository.getWordDefinitions(term)
                 searchedWordList.value = sortList(isOrdered, sort, listSearchedWord.list)
                 UtilCache.addToCache(term, listSearchedWord.list)
 
@@ -41,9 +40,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun sortList(isOrdered: Boolean, sort: Boolean, searchedWordList: List<SearchedWord>): List<SearchedWord> = when {
-            isOrdered && sort -> searchedWordList.sortedByDescending { it.thumbs_up }
-            isOrdered -> searchedWordList.sortedByDescending { it.thumbs_down }
-            else -> searchedWordList
+        isOrdered && sort -> searchedWordList.sortedByDescending { it.thumbs_up }
+        isOrdered -> searchedWordList.sortedByDescending { it.thumbs_down }
+        else -> searchedWordList
     }
 
 }

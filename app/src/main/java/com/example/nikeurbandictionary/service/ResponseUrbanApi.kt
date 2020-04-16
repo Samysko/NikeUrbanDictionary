@@ -1,9 +1,14 @@
 package com.example.nikeurbandictionary.service
 
-import android.content.Context
+import com.example.nikeurbandictionary.model.SearchedWord
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ResponseUrbanApi(context: Context) {
-    private val urbanApi: UrbanApi = UrbanApi.create(context)
-
-    suspend fun retrieveWordDefinitions(term: String) = urbanApi.getWordDefinitions(term)
+@Singleton
+class ResponseUrbanApi @Inject constructor(private val dataSource: DataSource ) {
+    private suspend fun retrieveWordDefinitions(searchTerm: String): List<SearchedWord> {
+        val definitionsResponse = dataSource.loadDefinitions(searchTerm)
+        val listWords = definitionsResponse.list
+        return listWords
+    }
 }

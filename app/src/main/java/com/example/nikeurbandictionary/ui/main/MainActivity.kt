@@ -6,27 +6,37 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nikeurbandictionary.NikeDictionaryApp
 import com.example.nikeurbandictionary.R
+import com.example.nikeurbandictionary.di.ViewModelFactory
 import com.example.nikeurbandictionary.ui.CustomDialogSortFragment
 import com.example.nikeurbandictionary.ui.main.recycler.SearchedWordAdapter
 import com.example.nikeurbandictionary.util.SORT_FRAGMENT_TAG
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_word_description.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListener {
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
-    private val searchedWordAdapter by lazy { SearchedWordAdapter() }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    lateinit var viewModel: MainViewModel
+    private val searchedWordAdapter by lazy { SearchedWordAdapter() }
     private var sortingEnabled: Boolean = false
     private var sortBy: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as NikeDictionaryApp).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this, this.viewModelFactory).get(MainViewModel::class.java)
 
         ibSort.setOnClickListener {
             showDialogFragment()
@@ -37,7 +47,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         initRecyclerView()
         initializeListeners()
     }
-
+    
     private fun initializeWordObserver() {
         viewModel.searchedWordList.observe(this, Observer {
             searchedWordAdapter.submitList(it)
@@ -68,7 +78,7 @@ class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListene
         rvWordList.adapter = searchedWordAdapter
     }
 
-    private fun showDialogFragment(){
+    private fun showDialogFragment() {
         val sortDialogFragment = CustomDialogSortFragment()
         val fragmentManager = supportFragmentManager
         sortDialogFragment.show(fragmentManager, SORT_FRAGMENT_TAG)
