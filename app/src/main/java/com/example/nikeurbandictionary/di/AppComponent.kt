@@ -10,5 +10,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ServiceModule::class, ViewModelFactoryModule::class, MainViewModelModule::class])
 interface AppComponent {
+
     fun inject(activity: MainActivity)
 }

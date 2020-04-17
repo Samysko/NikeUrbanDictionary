@@ -11,6 +11,7 @@ import com.example.nikeurbandictionary.util.THUMBS_UP
 import kotlinx.android.synthetic.main.fragment_custom_dialog_sort.*
 
 class CustomDialogSortFragment : DialogFragment(), View.OnClickListener {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_custom_dialog_sort, container, false)
     }

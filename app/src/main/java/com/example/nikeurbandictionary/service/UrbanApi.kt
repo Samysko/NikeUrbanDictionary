@@ -7,8 +7,8 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface UrbanApi {
+
     @Headers("X-RapidAPI-Key: ${BuildConfig.KEY_URBAN_DICTIONARY}")
     @GET("/define")
     suspend fun getWordDefinitions(@Query("term") term: String): SearchedWordList
-
 }

@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.item_word_description.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), CustomDialogSortFragment.DialogListener {
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
