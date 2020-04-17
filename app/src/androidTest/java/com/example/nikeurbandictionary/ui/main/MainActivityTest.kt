@@ -24,7 +24,7 @@ class MainActivityTest{
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun shouldHaveItemsInside(){
+    fun Should_HaveItemsInsideTheRecyclerView_When_AWordIsSearched(){
         val mainEditText = onView(ViewMatchers
             .withId(R.id.etWordSearch))
         val mainRecyclerView = onView(withId(R.id.rvWordList))
@@ -44,7 +44,7 @@ class MainActivityTest{
     }
 
     @Test
-    fun shouldNotBeEmpty(){
+    fun Should_EditTextNotBeEmpty_When_TextIsIntroduced(){
         val mainEditText = onView(withId(R.id.etWordSearch))
 
         mainEditText.perform(ViewActions
@@ -54,7 +54,7 @@ class MainActivityTest{
     }
 
     @Test
-    fun shouldDisplayCustomDialog(){
+    fun Should_DisplayCustomDialogFragment_When_SortingButtonIsPressed(){
         val mainButton = onView(withId(R.id.ibSort))
         val dialogButton = onView(withId(R.id.rbLikes))
 
