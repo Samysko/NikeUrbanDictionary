@@ -1,5 +1,7 @@
 package com.example.nikeurbandictionary.ui.main
 
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val repository: UrbanApi) : ViewModel() {
-    val searchedWordList = MutableLiveData<List<SearchedWord>>()
-    val progress = MutableLiveData<Boolean>()
+    private val _searchedWordList = MutableLiveData<List<SearchedWord>>()
+    private val _progress = MutableLiveData<Boolean>()
+
+    val searchedWordList: LiveData<List<SearchedWord>> = _searchedWordList
+    val progress: LiveData<Boolean> = _progress
 
     /**
      *  This function updates the SearchedWords List's objects by launching a coroutine.
@@ -25,21 +30,21 @@ class MainViewModel @Inject constructor(private val repository: UrbanApi) : View
         val cache = UtilCache.getCache(term)
 
         if (cache != null) {
-            searchedWordList.value = cache
-            searchedWordList.postValue(searchedWordList.value?.sortByLikes(sortBy, sortingEnabled))
+            _searchedWordList.value = cache
+            _searchedWordList.value?.sortByLikes(sortBy, sortingEnabled)
         } else {
             try {
-                progress.value = true
+                _progress.value = (true)
                 val listSearchedWord = repository.getWordDefinitions(term)
-                searchedWordList.value = listSearchedWord.list
+                _searchedWordList.value = listSearchedWord.list
                 UtilCache.addToCache(term, listSearchedWord.list)
-                searchedWordList.postValue(searchedWordList.value?.sortByLikes(sortBy, sortingEnabled))
+                _searchedWordList.value?.sortByLikes(sortBy, sortingEnabled)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
 
-        progress.value = false
+        _progress.value = false
     }
 
 }
